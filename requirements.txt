@@ -1,0 +1,4 @@
+flask
+flask-discord
+discord
+discord.py
