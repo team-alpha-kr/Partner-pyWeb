@@ -12,8 +12,9 @@ os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "false"
 
 app.config["DISCORD_CLIENT_ID"] = "801279922722045962"
 app.config["DISCORD_CLIENT_SECRET"] = "zosKMQ95etnO1dZv7D5vet7TyVhyXwt5"  # Discord client secret.
-app.config["DISCORD_REDIRECT_URI"] = "http://localhost:8080/callback"  # URL to your callback endpoint.
+# app.config["DISCORD_REDIRECT_URI"] = "http://localhost:8080/callback"  # URL to your callback endpoint.
 # app.config["DISCORD_REDIRECT_URI"] = "http://partner.alphakr.xyz/callback"  # URL to your callback endpoint.
+app.config["DISCORD_REDIRECT_URI"] = "http://alphakr.xyz:8081/callback"  # URL to your callback endpoint.
 app.config["DISCORD_BOT_TOKEN"] = "ODAxMjc5OTIyNzIyMDQ1OTYy.YAeYFA.G9TddtDdPZ3Xlb7AAHD6ddVWVbY"
 discord = DiscordOAuth2Session(app)
 
