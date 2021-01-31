@@ -12,11 +12,14 @@ os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "false"
 
 app.config["DISCORD_CLIENT_ID"] = "801279922722045962"
 app.config["DISCORD_CLIENT_SECRET"] = "zosKMQ95etnO1dZv7D5vet7TyVhyXwt5"  # Discord client secret.
-# app.config["DISCORD_REDIRECT_URI"] = "http://localhost:8080/callback"  # URL to your callback endpoint.
+# app.config["DISCORD_REDIRECT_URI"] = "http://localhost:2052/callback"  # URL to your callback endpoint.
 # app.config["DISCORD_REDIRECT_URI"] = "http://partner.alphakr.xyz/callback"  # URL to your callback endpoint.
-app.config["DISCORD_REDIRECT_URI"] = "http://alphakr.xyz:8081/callback"  # URL to your callback endpoint.
+app.config["DISCORD_REDIRECT_URI"] = "http://alphakr.xyz:2052/callback"  # URL to your callback endpoint.
 app.config["DISCORD_BOT_TOKEN"] = "ODAxMjc5OTIyNzIyMDQ1OTYy.YAeYFA.G9TddtDdPZ3Xlb7AAHD6ddVWVbY"
 discord = DiscordOAuth2Session(app)
+
+def on_json_loading_failed_return_dict(e):  
+    return '없음'
 
 @app.route('/', methods=['GET','POST'])
 def index():
@@ -42,15 +45,6 @@ def logout():
 		return redirect(url_for("index"))
 	else:
 		return redirect(url_for("index"))
-
-@app.route('/api/ip', methods=['GET', 'POST'])
-def ip():
-    return request.environ.get('HTTP_X_REAL_IP', request.remote_addr)
-    #return jsonify({'ip': request.remote_addr}), 200
-    #return jsonify({'ip': request.environ['REMOTE_ADDR']}), 200
-
-def on_json_loading_failed_return_dict(e):  
-    return '없음'
 
 @app.route('/form/1', methods=['GET','POST'])
 def form1():
@@ -128,12 +122,8 @@ def form3():
 				discord.fetch_guilds()  #로그인정보을 가져와라
 			except:
 				return redirect(url_for("logout"))  #못가져오면 로그아웃
-			user = discord.fetch_user()
-			run_webhook.send(f"⛔ [ 403 ERROR ] {user}님이 파트너 신청 3단계 페이지에 정상적이지 않은 접근을 시도 했습니다.")
 			return "<script>alert('정상적이지 않은 접근입니다.');location.replace('/');</script>"
 		else:  #로그인이 안되어있는가?
-			ip = request.environ.get('HTTP_X_REAL_IP', request.remote_addr)
-			run_webhook.send(f"⛔ [ 403 ERROR ] 비 로그인 유저({ip})가 파트너 신청 3단계 페이지에 정상적이지 않은 접근을 시도 했습니다.")
 			return "<script>alert('정상적이지 않은 접근입니다.');location.replace('/');</script>"
 
 @app.route('/form/action', methods=['GET','POST'])
@@ -172,18 +162,7 @@ def action():
 
 @app.errorhandler(404)
 def page_not_found(error):
-	if discord.authorized:  #로그인이 되어있는가
-		try:
-			discord.fetch_guilds()  #로그인정보을 가져와라
-		except:
-			return redirect(url_for("logout"))  #못가져오면 로그아웃
-		user = discord.fetch_user()
-		run_webhook.send(f"⛔ [ 404 ERROR ] {user} 님이 요청하신 페이지가 존재하지 않습니다.")
-		return render_template("error/404.html")
-	else:  #로그인이 안되어있는가?
-		ip = request.environ.get('HTTP_X_REAL_IP', request.remote_addr)
-		run_webhook.send(f"⛔ [ 404 ERROR ] 비 로그인 유저({ip})가 요청하신 페이지가 존재하지 않습니다.")
-		return render_template("error/404.html")
+	return render_template("error/404.html")
 
 @app.errorhandler(500)
 def servererror(error):
@@ -198,5 +177,5 @@ def badrequest(error):
 run_webhook.send("✅ 웹사이트가 실행이 되었습니다!")
 
 # app.run(host='0.0.0.0', port=5000, debug=False)
-app.run(host='0.0.0.0', port=8081, debug=False)
+app.run(host='0.0.0.0', port=2052, debug=False)
 # app.run(host='0.0.0.0', port=5000, debug=True)
