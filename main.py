@@ -155,11 +155,17 @@ def action():
 			message = request.form['message']
 			image = request.form['image']
 			video = request.form['video']
-			webhook.send(f"<@627292715956043785>\n✅ 파트너 신청이 도착했습니다.\n\n개인정보처리방침 동의 여부: {privacy}\n신청자: {nickname}\n서버(초대 링크): {server}\n멤버 수: {member}\n컨셉 정보: {category}, {etc_text}\n홍보지: {message}\n이미지: {image}\n영상: {video}")
+			if etc_text == '':
+				etc_text = 'Unknown'
+			webhook.send(f"<@627292715956043785>\n✅ 파트너 신청이 도착했습니다.\n\n개인정보처리방침 동의 여부: {privacy}\n신청자: {nickname}\n서버(초대 링크): {server}\n멤버 수: {member}\n카테고리 정보: {category} ({etc_text})\n홍보지: {message}\n이미지: {image}\n영상: {video}")
 			return render_template('form/action.html')
 		else:  #로그인이 안되어있는가?
 			return redirect(url_for("index"))
 
+@app.route('/guide/<id>', method=['GET', 'POST'])
+def guide(id):
+	if id == 'paste':
+		return 
 @app.errorhandler(404)
 def page_not_found(error):
 	return render_template("error/404.html")
