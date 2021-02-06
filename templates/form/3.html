@@ -113,8 +113,8 @@
                     <input type="hidden" name="category" value="{{category}}" required>
                     <input type="hidden" name="etc_text" value="{{etc_text}}" required>
                     <span class="cr-1 intro-desc">파트너 신청 서버의 홍보지</span>
-                    <span class="cr-1 intro-desc">줄바꿈은, &n 으로 표기해 주세요!(기술적 문제)</span>
-                    <span>ex) 안녕하세요&n</span><br><br>
+                    <span class="cr-1 intro-desc">홍보지는 "Paste Lavavel"을 통해 링크화 하여 첨부해주세요.</span><br>
+                    <span>"Paste Lavavel" 주소는 <a href="https://paste.laravel.io">https://paste.laravel.io</a> 입니다.</span><br><br>
                     <div class="input-group mb-3">
                       <input class="form-control" placeholder="파트너 신청 서버의 홍보지" aria-label="파트너 신청 서버의 홍보지" aria-describedby="basic-addon2" name="message" required>
                     </div>
@@ -123,6 +123,12 @@
                     <span>"윈섭 이미지 CDN" 주소는 <a href="https://img.winsub.kr">https://img.winsub.kr</a> 입니다.</span><br><br>
                     <div class="input-group mb-3">
                       <input type="text" class="form-control" placeholder="홍보지에 사진이 있다면, 여기에 올려주세요!" aria-label="홍보지에 사진이 있다면, 여기에 올려주세요!" aria-describedby="basic-addon2" name="image" required>
+                    </div>
+                    <span class="cr-1 intro-desc">홍보지에 영상이 있다면, 여기에 올려주세요!</span>
+                    <span>"Youtube"에 올려 링크화 하여 첨부해주세요. 없을 경우에는 '없음' 이라고 표기 부탁드립니다.</span><br>
+                    <span>"Youtube" 주소는 <a href="https://studio.youtube.com">https://studio.youtube.com</a> 입니다.</span><br><br>
+                    <div class="input-group mb-3">
+                      <input type="text" class="form-control" placeholder="홍보지에 사진이 있다면, 여기에 올려주세요!" aria-label="홍보지에 사진이 있다면, 여기에 올려주세요!" aria-describedby="basic-addon2" name="video" required>
                     </div>
                     <input type="reset" class="btn btn-danger btn-lg" onclick="cancel();" value="이전">
                     <input type="submit" class="btn btn-success btn-lg" value="다음">
