@@ -12,8 +12,8 @@ os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "false"
 
 app.config["DISCORD_CLIENT_ID"] = "801279922722045962"
 app.config["DISCORD_CLIENT_SECRET"] = "zosKMQ95etnO1dZv7D5vet7TyVhyXwt5"  # Discord client secret.
-# app.config["DISCORD_REDIRECT_URI"] = "http://localhost:2052/callback"  # URL to your callback endpoint.
-app.config["DISCORD_REDIRECT_URI"] = "http://partner.alphakr.xyz/callback"  # URL to your callback endpoint.
+app.config["DISCORD_REDIRECT_URI"] = "http://localhost:2052/callback"  # URL to your callback endpoint.
+# app.config["DISCORD_REDIRECT_URI"] = "http://partner.alphakr.xyz/callback"  # URL to your callback endpoint.
 app.config["DISCORD_BOT_TOKEN"] = "ODAxMjc5OTIyNzIyMDQ1OTYy.YAeYFA.G9TddtDdPZ3Xlb7AAHD6ddVWVbY"
 discord = DiscordOAuth2Session(app)
 
@@ -54,7 +54,7 @@ def form1():
 			except:
 				return redirect(url_for("logout"))  #못가져오면 로그아웃
 			user = discord.fetch_user()
-			return render_template('form/1.html', user=user)
+			return render_template('req_form/1.html', user=user)
 		else:  #로그인이 안되어있는가?
 			return redirect(url_for("login"))
 	else:
@@ -81,7 +81,7 @@ def form2():
 				return redirect(url_for("logout"))  #못가져오면 로그아웃
 			privacy = request.form['privacy']
 			nickname = request.form['nickname']
-			return render_template('form/2.html', privacy=privacy, nickname=nickname)
+			return render_template('req_form/2.html', privacy=privacy, nickname=nickname)
 		else:  #로그인이 안되어있는가?
 			return redirect(url_for("login"))
 	else:
@@ -112,7 +112,7 @@ def form3():
 			member = request.form['member']
 			category = request.form['category']
 			etc_text = request.form['etc_text']
-			return render_template('form/3.html', privacy=privacy, nickname=nickname, server=server, member=member, category=category, etc_text=etc_text)
+			return render_template('req_form/3.html', privacy=privacy, nickname=nickname, server=server, member=member, category=category, etc_text=etc_text)
 		else:  #로그인이 안되어있는가?
 			return redirect(url_for("login"))
 	else:
@@ -158,7 +158,7 @@ def action():
 			if etc_text == '':
 				etc_text = 'Unknown'
 			webhook.send(f"<@627292715956043785>\n✅ 파트너 신청이 도착했습니다.\n\n개인정보처리방침 동의 여부: {privacy}\n신청자: {nickname}\n서버(초대 링크): {server}\n멤버 수: {member}\n카테고리 정보: {category} ({etc_text})\n홍보지: {message}\n이미지: {image}\n영상: {video}")
-			return render_template('form/action.html')
+			return render_template('req_form/action.html')
 		else:  #로그인이 안되어있는가?
 			return redirect(url_for("index"))
 

@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="naver-site-verification" content="daefca3a44f1b7ee89c8cbcfcb73715ec7060547" />
+    <link rel="icon" href="/favicon.ico">
+    <meta name="theme-color" content="#000000">
+    <meta name="description" content="Team Alpha 공식 사이트">
+    <link rel="stylesheet" href="/static/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/font.css">
+    <link rel="stylesheet" href="/static/css/custom/App.css">
+    <script src="/static/js/jquery-3.5.1.min.js"></script>
+    <script src="/static/js/popper.js"></script>
+    <script src="/static/js/bootstrap/bootstrap.min.js"></script>
+    <script src="/static/js/swal.min.js"></script>
+    <script>
+    function cancel() {
+      swal({
+        title: "정말 취소하시겠습니까?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          swal("취소 되었습니다.", {
+            icon: "success",
+            buttons: false,
+          });
+          setTimeout(function(){
+            location.replace('/form/1')
+          }, 2500)
+        } else {
+          void(0);
+        }
+      });
+    }
+    function paramcheck(){
+      console.log('{{privacy}}');
+      console.log('{{nickname}}');
+      if ('{{privacy}}' == 'no' || '{{privacy}}' == null || '{{privacy}}' == '') {
+        privacy_no(); 
+      }
+    }
+    </script>
+    <title>Team Alpha</title>
+</head>
+
+<body onload="paramcheck();">
+  <div id="root">
+    <div class="App">
+        <div>
+            {% include '/components/navbar.html' %}
+            <div class="index-small"><span class="index-topic-small">Team Alpha 파트너 신청</span></div>
+            <div class="introduce bg-1 cr-0">
+              <div class="container">
+                  <div class="left"><span class="cr-1 intro-topic">Team Alpha 파트너 신청</span><span class="cr-1 intro-desc">Team Alpha의 파트너가 되고 싶으신가요? 아래에서 파트너 신청을 하셔서 파트너가 되어 보세요!</span></div>
+                  <form action="/form/3" method="POST">
+                    <input type="hidden" name="privacy" value="{{privacy}}" required>
+                    <input type="hidden" name="nickname" value="{{nickname}}" required>
+                    <span class="cr-1 intro-desc">파트너 신청 서버 이름 및 <strong><u>무제한</u></strong> 초대링크</span>
+                    <div class="input-group mb-3">
+                      <input type="text" class="form-control" placeholder="파트너 신청할 서버 이름 및 무제한 초대링크" aria-label="파트너 신청할 서버 이름 및 무제한 초대링크" aria-describedby="basic-addon2" name="server" required>
+                    </div>
+                    <span class="cr-1 intro-desc">파트너 신청 서버 인원수(봇 제외)</span>
+                    <div class="input-group mb-3">
+                      <input type="number" class="form-control" min="50" placeholder="파트너 신청 서버 인원수(봇 제외)" aria-label="파트너 신청 서버 인원수(봇 제외)" aria-describedby="basic-addon2" name="member" required>
+                    </div>
+                    <span class="cr-1 intro-desc">파트너 신청 서버 카테고리</span>
+                    <!-- 친목 (community) -->
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <input type="radio" aria-label="친목 (컨셉이 있다면? 기타에 적어주세요!)" name="category" value="community">
+                          </div>
+                        </div>
+                        <input type="text" class="form-control" aria-label="친목 (컨셉이 있다면? 기타에 적어주세요!)" placeholder="친목 (컨셉이 있다면? 기타에 적어주세요!)" disabled>
+                      </div>
+                      <!-- 개발 (develop) -->
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <input type="radio" aria-label="개발" name="category" value="develop">
+                          </div>
+                        </div>
+                        <input type="text" class="form-control" aria-label="개발" placeholder="개발" disabled>
+                      </div>
+                      <!-- 홍보 (promotion) -->
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <input type="radio" aria-label="홍보" value="promotion" name="category">
+                          </div>
+                        </div>
+                        <input type="text" class="form-control" aria-label="홍보" placeholder="홍보" disabled>
+                      </div>
+                      <!-- 기타 (etc) -->
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <input type="radio" aria-label="기타" value="etc" name="category">
+                          </div>
+                        </div>
+                        <input type="text" name="etc_text" class="form-control" aria-label="기타 (친목의 컨셉 or 여기에 적혀있지 않은 카테고리)" placeholder="기타 (친목의 컨셉 or 여기에 적혀있지 않은 카테고리)">
+                    </div>
+                    <input type="reset" class="btn btn-danger btn-lg" onclick="cancel();" value="이전">
+                    <input type="submit" class="btn btn-success btn-lg" value="다음">
+                  </form>
+              </div>
+        </div>
+        {% include '/components/footer.html' %}
+</div>
+</body>
+</html>
