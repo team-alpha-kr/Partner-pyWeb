@@ -162,10 +162,10 @@ def action():
 		else:  #로그인이 안되어있는가?
 			return redirect(url_for("index"))
 
-@app.route('/guide/<id>', method=['GET', 'POST'])
+@app.route('/guide/<id>', methods=['GET', 'POST'])
 def guide(id):
-	if id == 'paste':
-		return 
+		return f"<script>location.replace('https://team-alpha-kr.github.io/Partner-Guide/{id}.html');</script>"
+		
 @app.errorhandler(404)
 def page_not_found(error):
 	return render_template("error/404.html")
