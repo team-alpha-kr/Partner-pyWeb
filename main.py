@@ -54,7 +54,7 @@ def form1():
 			except:
 				return redirect(url_for("logout"))  #못가져오면 로그아웃
 			user = discord.fetch_user()
-			return render_template('req_form/1.html', user=user)
+			return render_template('form/1.html', user=user)
 		else:  #로그인이 안되어있는가?
 			return redirect(url_for("login"))
 	else:
@@ -81,7 +81,7 @@ def form2():
 				return redirect(url_for("logout"))  #못가져오면 로그아웃
 			privacy = request.form['privacy']
 			nickname = request.form['nickname']
-			return render_template('req_form/2.html', privacy=privacy, nickname=nickname)
+			return render_template('form/2.html', privacy=privacy, nickname=nickname)
 		else:  #로그인이 안되어있는가?
 			return redirect(url_for("login"))
 	else:
@@ -112,7 +112,7 @@ def form3():
 			member = request.form['member']
 			category = request.form['category']
 			etc_text = request.form['etc_text']
-			return render_template('req_form/3.html', privacy=privacy, nickname=nickname, server=server, member=member, category=category, etc_text=etc_text)
+			return render_template('form/3.html', privacy=privacy, nickname=nickname, server=server, member=member, category=category, etc_text=etc_text)
 		else:  #로그인이 안되어있는가?
 			return redirect(url_for("login"))
 	else:
@@ -158,14 +158,24 @@ def action():
 			if etc_text == '':
 				etc_text = 'Unknown'
 			webhook.send(f"<@627292715956043785>\n✅ 파트너 신청이 도착했습니다.\n\n개인정보처리방침 동의 여부: {privacy}\n신청자: {nickname}\n서버(초대 링크): {server}\n멤버 수: {member}\n카테고리 정보: {category} ({etc_text})\n홍보지: {message}\n이미지: {image}\n영상: {video}")
-			return render_template('req_form/action.html')
+			return render_template('form/action.html')
 		else:  #로그인이 안되어있는가?
 			return redirect(url_for("index"))
 
 @app.route('/guide/<id>', methods=['GET', 'POST'])
 def guide(id):
-		return f"<script>location.replace('https://team-alpha-kr.github.io/Partner-Guide/{id}.html');</script>"
+	return f"<script>location.replace('https://team-alpha-kr.github.io/Partner-Guide/{id}.html');</script>"
 		
+# S: 2021 파트너 웹사이트 개편 코드
+
+# S: 210210 공지사항
+@app.route('/notice/<id>', methods=['GET', 'POST'])
+def notice(id):
+	return render_template(f"2021temp/notice/{id}.html")
+# E: 210210 공지사항
+
+# E: 2021 파트너 웹사이트 개편 코드
+
 @app.errorhandler(404)
 def page_not_found(error):
 	return render_template("error/404.html")
