@@ -52,17 +52,11 @@
                   <div class="left"><span class="cr-1 intro-topic">Team Alpha 파트너 신청</span><span class="cr-1 intro-desc">Team Alpha의 파트너가 되고 싶으신가요? 아래에서 파트너 신청을 하셔서 파트너가 되어 보세요!</span></div>
                   <form action="/form/2" method="POST">
                     <input type="hidden" name="nickname" value="{{user}}">
-                    <span class="cr-1 intro-desc">약관 동의</span>
-                    <span>본 파트너 신청을 진행 하려면, 개인정보 처리방침에 동의가 필요합니다.<br>개인정보 처리방침 : <a href="https://alphakr.xyz/term/privacy">https://alphakr.xyz/term/privacy</a></span>
-                    <span>이 양식을 작성함으로써 이 사이트에 입력하는 정보는 모두 정확하며, 서버 구성 필요 조건을 제대로 따랐으며, 해당 Discord 서버는 본인이 대표하는 조직이 소유하고 관리 중임을 확인합니다. 또한 거짓 또는 장난 신청에 대해서는 처벌되실 수 있으니, 다시 한번 확인 해 주시기 바랍니다.</span>
-                    <div class="input-group mb-3">
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="customRadioInline1" name="privacy" class="custom-control-input" value="no">
-                        <label class="custom-control-label" for="customRadioInline1">비동의</label>
-                      </div>
-                      <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="customRadioInline2" name="privacy" class="custom-control-input" value="yes">
-                        <label class="custom-control-label" for="customRadioInline2">동의</label>
+                    <span class="cr-1 intro-desc">파트너 인증 번호 입력</span>
+                    <span>본 파트너 정보 수정 신청을 진행 하려면, 인증 번호가 필요합니다. (파트너 신청시 발급됨.)</span>
+                    <br><br><div class="input-group mb-3">
+                      <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="파트너 인증 번호 입력" aria-label="파트너 인증 번호 입력" aria-describedby="basic-addon2" name="code" required>
                       </div>
                     </div>
                     <input type="reset" class="btn btn-danger btn-lg" onclick="cancel();" value="이전">

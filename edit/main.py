@@ -3,7 +3,7 @@ import os
 from flask import Flask, request, render_template, request, redirect, url_for, jsonify
 from flask_discord import DiscordOAuth2Session, requires_authorization
 from discord import Webhook, RequestsWebhookAdapter
-webhook = Webhook.partial(804563160521900092, "BzNJjxg3-3uxBL6DtSZysERyr5ZmvvZz1yJ0AH05N_v5DBH7ssfqmuU6QUKfp3cYp_3P", adapter=RequestsWebhookAdapter())
+webhook = Webhook.partial(814742019489660939, "rvSBVHtGPflSASjeGEEKdZxC5Z_w1UM_ovc_xD0ZPcFy1UeUybFM4ClGANu6CEWTQame", adapter=RequestsWebhookAdapter())
 run_webhook = Webhook.partial(804602090537091072, "6ZMww14Nh7OVeeHUt5bWeixreoWQmSzPVfFmIpU3BEr8OYLGqickY1VyoqH2IeMs1Kd8", adapter=RequestsWebhookAdapter())
 app = Flask(__name__)
 
@@ -22,7 +22,7 @@ def on_json_loading_failed_return_dict(e):
 
 @app.route('/', methods=['GET','POST'])
 def index():
-	return render_template('index.html')
+	return render_template('form/1.html')
 
 @app.route("/login", methods=["GET"])
 def login():
@@ -79,9 +79,9 @@ def form2():
 				discord.fetch_guilds()  #로그인정보을 가져와라
 			except:
 				return redirect(url_for("logout"))  #못가져오면 로그아웃
-			privacy = request.form['privacy']
+			code = request.form['code']
 			nickname = request.form['nickname']
-			return render_template('form/2.html', privacy=privacy, nickname=nickname)
+			return render_template('form/2.html', code=code, nickname=nickname)
 		else:  #로그인이 안되어있는가?
 			return redirect(url_for("login"))
 	else:
@@ -106,13 +106,13 @@ def form3():
 				discord.fetch_guilds()  #로그인정보을 가져와라
 			except:
 				return redirect(url_for("logout"))  #못가져오면 로그아웃
-			privacy = request.form['privacy']
+			code = request.form['code']
 			nickname = request.form['nickname']
 			server = request.form['server']
 			member = request.form['member']
 			category = request.form['category']
 			etc_text = request.form['etc_text']
-			return render_template('form/3.html', privacy=privacy, nickname=nickname, server=server, member=member, category=category, etc_text=etc_text)
+			return render_template('form/3.html', code=code, nickname=nickname, server=server, member=member, category=category, etc_text=etc_text)
 		else:  #로그인이 안되어있는가?
 			return redirect(url_for("login"))
 	else:
@@ -146,7 +146,7 @@ def action():
 				discord.fetch_guilds()  #로그인정보을 가져와라
 			except:
 				return redirect(url_for("logout"))  #못가져오면 로그아웃
-			privacy = request.form['privacy']
+			code = request.form['code']
 			nickname = request.form['nickname']
 			server = request.form['server']
 			member = request.form['member']
@@ -157,8 +157,8 @@ def action():
 			video = request.form['video']
 			if etc_text == '':
 				etc_text = 'Unknown'
-			webhook.send(f"<@627292715956043785>\n✅ 파트너 신청이 도착했습니다.\n\n개인정보처리방침 동의 여부: {privacy}\n신청자: {nickname}\n서버(초대 링크): {server}\n멤버 수: {member}\n카테고리 정보: {category} ({etc_text})\n홍보지: {message}\n이미지: {image}\n영상: {video}")
-			return render_template('form/action.html')
+			webhook.send(f"<@627292715956043785>\n✅ 파트너 수정 신청이 도착했습니다.\n\n파트너 코드: {code}\n신청자: {nickname}\n서버(초대 링크): {server}\n멤버 수: {member}\n카테고리 정보: {category} ({etc_text})\n홍보지: {message}\n이미지: {image}\n영상: {video}")
+			return render_template('form/action.html', code = code)
 		else:  #로그인이 안되어있는가?
 			return redirect(url_for("index"))
 

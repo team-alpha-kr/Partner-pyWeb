@@ -37,18 +37,11 @@
         }
       });
     }
-    function paramcheck(){
-      console.log('{{privacy}}');
-      console.log('{{nickname}}');
-      if ('{{privacy}}' == 'no' || '{{privacy}}' == null || '{{privacy}}' == '') {
-        privacy_no(); 
-      }
-    }
     </script>
     <title>Team Alpha</title>
 </head>
 
-<body onload="paramcheck();">
+<body>
   <div id="root">
     <div class="App">
         <div>
@@ -58,7 +51,7 @@
               <div class="container">
                   <div class="left"><span class="cr-1 intro-topic">Team Alpha 파트너 신청</span><span class="cr-1 intro-desc">Team Alpha의 파트너가 되고 싶으신가요? 아래에서 파트너 신청을 하셔서 파트너가 되어 보세요!</span></div>
                   <form action="/form/3" method="POST">
-                    <input type="hidden" name="privacy" value="{{privacy}}" required>
+                    <input type="hidden" name="code" value="{{code}}" required>
                     <input type="hidden" name="nickname" value="{{nickname}}" required>
                     <span class="cr-1 intro-desc">파트너 신청 서버 이름 및 <strong><u>무제한</u></strong> 초대링크</span>
                     <div class="input-group mb-3">

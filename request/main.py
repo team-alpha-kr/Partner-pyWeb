@@ -1,9 +1,9 @@
 # -*- coding: utf8 -*-
-import os
+import os, random
 from flask import Flask, request, render_template, request, redirect, url_for, jsonify
 from flask_discord import DiscordOAuth2Session, requires_authorization
 from discord import Webhook, RequestsWebhookAdapter
-webhook = Webhook.partial(804563160521900092, "BzNJjxg3-3uxBL6DtSZysERyr5ZmvvZz1yJ0AH05N_v5DBH7ssfqmuU6QUKfp3cYp_3P", adapter=RequestsWebhookAdapter())
+webhook = Webhook.partial(814742019489660939, "rvSBVHtGPflSASjeGEEKdZxC5Z_w1UM_ovc_xD0ZPcFy1UeUybFM4ClGANu6CEWTQame", adapter=RequestsWebhookAdapter())
 run_webhook = Webhook.partial(804602090537091072, "6ZMww14Nh7OVeeHUt5bWeixreoWQmSzPVfFmIpU3BEr8OYLGqickY1VyoqH2IeMs1Kd8", adapter=RequestsWebhookAdapter())
 app = Flask(__name__)
 
@@ -13,7 +13,7 @@ os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "false"
 app.config["DISCORD_CLIENT_ID"] = "801279922722045962"
 app.config["DISCORD_CLIENT_SECRET"] = "zosKMQ95etnO1dZv7D5vet7TyVhyXwt5"  # Discord client secret.
 # app.config["DISCORD_REDIRECT_URI"] = "http://localhost:1111/callback"  # URL to your callback endpoint.
-app.config["DISCORD_REDIRECT_URI"] = "https://partner.alphakr.xyz/callback"  # URL to your callback endpoint.
+app.config["DISCORD_REDIRECT_URI"] = "https://partner-r.alphakr.xyz/callback"  # URL to your callback endpoint.
 app.config["DISCORD_BOT_TOKEN"] = "ODAxMjc5OTIyNzIyMDQ1OTYy.YAeYFA.G9TddtDdPZ3Xlb7AAHD6ddVWVbY"
 discord = DiscordOAuth2Session(app)
 
@@ -155,10 +155,11 @@ def action():
 			message = request.form['message']
 			image = request.form['image']
 			video = request.form['video']
+			partner_code = random.randrange(100000000000, 999999999999)
 			if etc_text == '':
 				etc_text = 'Unknown'
-			webhook.send(f"<@627292715956043785>\n✅ 파트너 신청이 도착했습니다.\n\n개인정보처리방침 동의 여부: {privacy}\n신청자: {nickname}\n서버(초대 링크): {server}\n멤버 수: {member}\n카테고리 정보: {category} ({etc_text})\n홍보지: {message}\n이미지: {image}\n영상: {video}")
-			return render_template('form/action.html')
+			webhook.send(f"<@627292715956043785>\n✅ 파트너 신청이 도착했습니다.\n\n파트너 코드: {partner_code}\n개인정보처리방침 동의 여부: {privacy}\n신청자: {nickname}\n서버(초대 링크): {server}\n멤버 수: {member}\n카테고리 정보: {category} ({etc_text})\n홍보지: {message}\n이미지: {image}\n영상: {video}")
+			return render_template('form/action.html', code = partner_code)
 		else:  #로그인이 안되어있는가?
 			return redirect(url_for("index"))
 
